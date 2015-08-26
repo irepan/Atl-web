@@ -1,0 +1,28 @@
+[
+    {
+        "id": "Standard",
+        "name": "Standard",
+        "desc": "Standard Template",  
+        "selected":true	     
+    },
+    {
+        "id": "General",
+        "name": "General",
+        "desc": "General"       
+    },
+    {
+        "id": "International",
+        "name": "International",
+        "desc": "International"       
+    },
+    {
+        "id": "EGGW",
+        "name": "EGGW",
+        "desc": "EGGW"       
+    },
+    {
+        "id": "New Standard",
+        "name": "New Standard",
+        "desc": "New Standard"       
+    }
+]

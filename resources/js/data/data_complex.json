@@ -1,0 +1,197 @@
+[
+    {
+        "columns": [
+            {
+                "field": "MANIFEST_ORDER",
+                "title": "Order",
+                "width": 40
+            },
+            {
+                "field": "PASSENGER_NAME",
+                "title": "PassengerName",
+                "width": 200
+            },
+            {
+                "field": "POD",
+                "title": "KAPA",
+                "width": 40
+            },
+            {
+                "field": "POA_1",
+                "title": "1-KBOS",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_2",
+                "title": "2-KORD",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_3",
+                "title": "3-KLAX",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_4",
+                "title": "4-KBOS",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_5",
+                "title": "5-KLAS",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_6",
+                "title": "6-KAPA",
+                "width": 55,
+                "align": "center"
+            },
+            {
+                "field": "POA_7",
+                "title": "7-KAPA",
+                "width": 55
+            }
+              
+        ],
+        "data": [
+            {
+                "MANIFEST_ORDER": "1",
+                "PASSENGER_NAME": "Able, JamesThomas",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "C",
+                "POA_3": "C",
+                "POA_4": "C",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "2",
+                "PASSENGER_NAME": "Daniel,Bobby",
+                "POD": "",
+                "POA_1": "",
+                "POA_2": "BC",
+                "POA_3": "",
+                "POA_4": "BC",
+                "POA_5": "",
+                "POA_6": "BC"
+            },
+            {
+                "MANIFEST_ORDER": "3",
+                "PASSENGER_NAME": "Adler, Joseph",
+                "POD": "",
+                "POA_1": "BCN",
+                "POA_2": "",
+                "POA_3": "BCN",
+                "POA_4": "",
+                "POA_5": "BCN",
+                "POA_6": ""
+            },
+            {
+                "MANIFEST_ORDER": "4",
+                "PASSENGER_NAME": "Erickson, Brian",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "C",
+                "POA_3": "",
+                "POA_4": "",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "5",
+                "PASSENGER_NAME": "Allen, Leslie",
+                "POD": "",
+                "POA_1": "",
+                "POA_2": "",
+                "POA_3": "CB",
+                "POA_4": "CB",
+                "POA_5": "CB",
+                "POA_6": "CB"
+            },
+            {
+                "MANIFEST_ORDER": "6",
+                "PASSENGER_NAME": "Burgeson, Susie",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "",
+                "POA_3": "",
+                "POA_4": "",
+                "POA_5": "",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "7",
+                "PASSENGER_NAME": "Alltop, MikeC.",
+                "POD": "",
+                "POA_1": "",
+                "POA_2": "C",
+                "POA_3": "C",
+                "POA_4": "C",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "8",
+                "PASSENGER_NAME": "Brown, Debra",
+                "POD": "",
+                "POA_1": "",
+                "POA_2": "",
+                "POA_3": "",
+                "POA_4": "",
+                "POA_5": "",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "9",
+                "PASSENGER_NAME": "Alltop, SusanL.",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "C",
+                "POA_3": "C",
+                "POA_4": "",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "10",
+                "PASSENGER_NAME": "Dillon, Beth",
+                "POD": "",
+                "POA_1": "",
+                "POA_2": "",
+                "POA_3": "C",
+                "POA_4": "C",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "11",
+                "PASSENGER_NAME": "Anderson, Fred",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "",
+                "POA_3": "",
+                "POA_4": "C",
+                "POA_5": "C",
+                "POA_6": "C"
+            },
+            {
+                "MANIFEST_ORDER": "12",
+                "PASSENGER_NAME": "Burgeson, ThomasK.",
+                "POD": "",
+                "POA_1": "C",
+                "POA_2": "C",
+                "POA_3": "C",
+                "POA_4": "C",
+                "POA_5": "C",
+                "POA_6": "C"
+            }
+        ]
+    }
+]

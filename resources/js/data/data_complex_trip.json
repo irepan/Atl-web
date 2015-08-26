@@ -1,0 +1,15 @@
+[{
+    "id": {
+        "legLogisticsOrder": 1,
+        "leg": 1,
+        "logisticType": "FBO"
+    },
+    "legLogisticsOrder": 1,
+    "leg": 1,
+    "logisticType": "FBO",
+    "apVendor": "",
+    "legLogisticsPOD": true,
+    "legLogisticsRecuested": false,
+    "legLogisticsConfirmed": false,
+    "legLogisticsNote": "s"
+}]

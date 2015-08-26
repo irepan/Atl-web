@@ -1,0 +1,4 @@
+[18-Jun-2012 00:00:32 UTC] PHP Parse error:  syntax error, unexpected $end in /home/curricul/public_html/app/webroot/files/mws-admin/plugins/editor/tinymce/jscripts/tiny_mce/plugins/imagemanager/login_session_auth.php on line 87
+[18-Jun-2012 00:25:49 UTC] PHP Parse error:  syntax error, unexpected T_BOOLEAN_AND, expecting ',' or ')' in /home/curricul/public_html/app/webroot/files/mws-admin/plugins/editor/tinymce/jscripts/tiny_mce/plugins/imagemanager/index.php on line 4
+[18-Jun-2012 00:26:09 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/curricul/public_html/app/webroot/files/mws-admin/plugins/editor/tinymce/jscripts/tiny_mce/plugins/imagemanager/index.php on line 4
+[18-Jun-2012 00:26:10 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/curricul/public_html/app/webroot/files/mws-admin/plugins/editor/tinymce/jscripts/tiny_mce/plugins/imagemanager/index.php on line 4

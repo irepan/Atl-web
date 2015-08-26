@@ -1,0 +1,55 @@
+.datagrid-cell{
+font-size:10px;
+}
+.datagrid-row{
+  height:15px;
+}
+.datagrid-header-row{
+  height: 15px;
+}
+.datagrid-header .datagrid-cell span{
+  font-size: 10px;
+  font-weight:bold;
+  color:#0E2D5F;
+}
+.panel-title {
+  font-size: 10px;
+  font-weight: bold;
+  color: #0E2D5F;
+  height: 6px;
+  line-height: 6px;
+}
+li {
+  font-size:10px;
+}
+.tabs-title {
+  font-size: 10px;
+}
+.tabs-header {
+  height: auto;
+}
+.datagrid-toolbar {
+  height: auto;
+}
+.textbox .textbox-text, h10, label, a {
+  font-size: 10px;
+  font-family:verdana,helvetica,arial,sans-serif;
+}
+/* .datagrid-body td { 
+  border-right:1px dotted transparent;  
+  border-bottom:1px dotted transparent; 
+} */
+h10{
+  color:#0E2D5F;
+}
+.combobox-item,
+.combobox-group {
+  font-size: 10px;
+}
+.textbox .textbox-text:disabled {
+     background: #F9F9F9;
+}
+
+.l-btn-text {
+  font-size: 10px;
+  }
