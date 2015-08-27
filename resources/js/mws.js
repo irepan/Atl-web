@@ -1,11 +1,11 @@
-$(document).ready(function() {
+$(function(){
 	/* Core JS Functions */
 	
 	/* Collapsible Panels */
 	$(".mws-panel.mws-collapsible .mws-panel-header")
 		.append("<div class=\"mws-collapse-button mws-inset\"><span></span></div>")
 			.find(".mws-collapse-button span")
-				.live("click", function(event) {
+				.on("click", function(event) {
 					$(this).toggleClass("mws-collapsed")
 						.parents(".mws-panel")
 							.find(".mws-panel-body")
@@ -24,7 +24,7 @@ $(document).ready(function() {
 	});
 	
 	/* Responsive Layout Script */
-	$("div#mws-navigation").live('click', function(event) {
+	$("div#mws-navigation").on('click', function(event) {
 	if(event.target === this) {
 		$(this).toggleClass('toggled');
 		}

@@ -7,7 +7,7 @@
 
 	<!-- Default Main Template -->
 	<definition name=".mainTemplate" template="/WEB-INF/templates/main.jsp">
-		<put-attribute name="title" value="Simple Tiles 3 Example" type="string" />
+		<put-attribute name="title" value="AIS System" type="string" />
 		<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/templates/footer.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />

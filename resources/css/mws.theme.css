@@ -1,6 +1,6 @@
 div#mws-header
 {
-	border-color:#FFCA08;
+	border-color:#AFB0B0;
 }
 
 .mws-panel .mws-panel-header span, 
@@ -37,5 +37,5 @@ div.dataTables_wrapper .dataTables_paginate span.paginate_active,
 .ui-accordion-header .ui-icon, 
 .ui-dialog-titlebar-close .ui-icon
 {
-	background-color:#FFCA08;
+	background-color:#AFB0B0;
 }
