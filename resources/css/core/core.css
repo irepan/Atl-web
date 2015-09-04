@@ -528,14 +528,14 @@ div#mws-navigation ul li ul li:hover
 div#mws-container
 {
 	margin-left:206px;
-	padding-top:100px;
+	padding-top:68px;
 	min-height:100%;
 }
 
 div#mws-container .container
 {
 	float:left;
-	margin:0 4%;
+	margin:0 0%;
 }
 
 

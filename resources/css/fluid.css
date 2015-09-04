@@ -1,7 +1,7 @@
 /* Grid - Fluid 960 grid
 -------------------------------------------------------------- */
 .container{
-	width:92%;
+	width:100%;
 	margin: 0 auto;
 	position: relative;
 }
@@ -9,8 +9,8 @@
 .grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_full{
 	float:left;
 	position:relative;
-	margin-left:1%;
-	margin-right:1%
+	margin-left:0%;
+	margin-right:0%
 }
 
 .grid_1		{ width:10.5%; }

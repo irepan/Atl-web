@@ -195,23 +195,33 @@
 	             title: 'Trip ID ' + getParameterByName('id')
 	         }
 	     });
+		 
+		 //
+		 $.ajax({
+			 type:"GET", 
+			 dataType: "json",
+	         url: '/atlas-web/atlas-ws/trip/' + getParameterByNameEncode('id') + '',
+	         success: function(data) {
+		         $('#tripComments').textbox('setValue', data.comment);
+	         }
+		 });
 
-
-        $('#tripGrid').datagrid({
-            method: 'get',
-            url: '/atlas-web/atlas-ws/trip/' + getParameterByNameEncode('id') + '/legs',
-            toolbar: '#tripToolbar',
-            //title: 'Trip Legs',
-            width: '950px',
-            height: '282px',
-            border: '1px',
-            singleSelect:   true,
-            fitColumns:     true,
-            remoteSort:     false,
-            //pagination:     'false',
-            sortOrder:      'desc',
-            view:           cardview,
-            columns:[[
+		 
+		 $('#tripGrid').datagrid({
+			 method: 'get',
+			 url: '/atlas-web/atlas-ws/trip/' + getParameterByNameEncode('id') + '/legs',
+			 toolbar: '#tripToolbar',
+			 //title: 'Trip Legs',
+			 width: '950px',
+			 height: '282px',
+			 border: '1px',
+			 singleSelect:   true,
+			 fitColumns:     true,
+			 remoteSort:     false,
+			 //pagination:     'false',
+			 sortOrder:      'desc',
+			 view:           cardview,
+			 columns:[[
                     {field:'number',              width:22,   title:'Lg'}, 
                     {field:'flightCategoryCode',  width:28,   title:'Cat'}, 
                     {field:'confirmed',           width:25,   title:'Cf'},
@@ -284,15 +294,14 @@
             ]],
             onClickRow: function(rowIndex){
                 var currentRow = $("#tripGrid").datagrid("getSelected"); 
-                searchTripData(currentRow);
+                searchLegData(currentRow);
                 searchLegLogistics(currentRow);
                 searchPassengers(currentRow);
             },
             onLoadSuccess: function()
             {
-            	
             	var currentRow = $("#tripGrid").datagrid('getRows')[0];
-                searchTripData(currentRow);
+            	searchLegData(currentRow);
                 searchLegLogistics(currentRow);
                 searchPassengers(currentRow);
             }
@@ -304,17 +313,34 @@
     * Section Code for Tap-TRIP
     **/
 
-    function searchTripData(idTrip){
+    function searchLegData(idTrip){
+    	
         // load dynamic data on grid  
-        $('#legComments').textbox('setValue', idTrip.comment);                       
+        $('#legComments').textbox('setValue', idTrip.comment);    
+        //load info poaAirComments
+		$.ajax({
+			type:"GET", 
+			dataType: "json",
+			url: '/atlas-web/atlas-ws/airport/' + idTrip.podAirportId + '/' + idTrip.podAirportRef,
+			success: function(data) {
+				$('#poaAirComments').textbox('setValue', data.comments);
+			}
+		});
     }       
     
     function searchPassengers(idLeg){
         // load info on  list passenger
     	 $('#lstPassengers').datalist({
-    		 width: '100%',
-    		 method: 'get',
-    		 url: '/atlas-web/atlas-ws/trip/'+ idLeg.id + '/passengers'
+    		height: 218,
+    		method: 'get',
+    		valueField: 'id',
+			textField: 'fullName' ,
+			lines: true, 
+			singleSelect: true,
+    		url: '/atlas-web/atlas-ws/trip/'+ idLeg.id + '/passengers',
+    		textFormatter: function(value,row,index) {
+    			return '<a href="#1">' + value + '</a>';
+    		}
          });     
     }
 
@@ -329,43 +355,77 @@
     	     height: 149, 
     	     border: 1,
              singleSelect:   true,
-             fitColumns:     true,
+             fitColumns:     false,
              remoteSort:     false,    		 
     		 columns:[[
-	             {field:'legLogisticsRecuested',    width: 60, title:'Rq',formatter:function(value,row,index){ 
-                     if(row.legLogisticsRecuested){
-                         return '<input type="checkbox" name="legLogisticsRecuested" checked value="1" disabled="disabled">'; 
-                     }
-                     else{
-                         return '<input type="checkbox" name="legLogisticsRecuested" disabled="disabled">'; 
-                     }
-                 }},
-	             {field:'legLogisticsConfirmed',    width: 60, title:'Cf', formatter:function(value,row,index){ 
-                     if(row.legLogisticsConfirmed){
-                         return '<input type="checkbox" name="legLogisticsConfirmed" checked value="1" disabled="disabled">'; 
-                     }
-                     else{
-                         return '<input type="checkbox" name="legLogisticsConfirmed" disabled="disabled">'; 
-                     }
-                 }},
-	             {field:'logisticType',             width: 260, title:'Type'},
-	             {field:'legLogisticsPOD',          width: 100, title:'ICAO', formatter:function(value,row,index){ 
-                     if(row.legLogisticsPOD){
-                         return idLeg.podAirportId; 
-                     }
-                     else{
-                         return idLeg.poaAirportId; 
-                     }
-                 }},
-	             {field:'VENDOR_NAME',              width: 160, title:'Vendor Name'},
-	             {field:'TELEPHONE',                width: 100, title:'Telephone'},
-	             {field:'legLogisticsNote',         width: 800, title:'Notes'}
+	             {
+	            	 field:'legLogisticsRecuested',    
+	            	 width: 30, 
+	            	 title:'Rq',
+	            	 formatter:function(value,row,index){ 
+	                     if(row.legLogisticsRecuested){
+	                         return '<input type="checkbox" name="legLogisticsRecuested" checked value="1" disabled="disabled">'; 
+	                     }
+	                     else{
+	                         return '<input type="checkbox" name="legLogisticsRecuested" disabled="disabled">'; 
+	                     }
+	            	 }},
+	             {
+	            	 field:'legLogisticsConfirmed',    
+	            	 width: 30, 
+	            	 title:'Cf', 
+	            	 formatter:function(value,row,index){ 
+	                     if(row.legLogisticsConfirmed){
+	                         return '<input type="checkbox" name="legLogisticsConfirmed" checked value="1" disabled="disabled">'; 
+	                     }
+	                     else{
+	                         return '<input type="checkbox" name="legLogisticsConfirmed" disabled="disabled">'; 
+	                     }
+	            	 }},
+	             {
+	            	 field:'logisticType',             
+	            	 width: 120, 
+	            	 title:'Type'},
+	             {
+	            	 field:'legLogisticsPOD',          
+	            	 width: 40, 
+	            	 title:'ICAO', 
+	            	 formatter:function(value,row,index){ 
+	                     if(row.legLogisticsPOD){
+	                         return '<a href="#1">' + idLeg.podAirportId + '</a>'; 
+	                     }
+	                     else{
+	                    	 return '<a href="#1">' + idLeg.poaAirportId + '</a>'; 
+	                     }
+	            	 }},
+	             {
+	                 field:'vendorName',              
+	                 width: 160, 
+	                 title:'Vendor Name', 
+	                 formatter:function(value,row,index){
+		            	 if(row.apVendor != null){
+		            		 return '<a href="#1">' + row.apVendor.vendorName + '</a>';
+		            	 }
+	                 }},
+	             {
+	                 field:'commValue',                
+	                 width: 100, 
+	                 title:'Telephone', 
+	                 formatter:function(value,row,index){
+		            	 console.log(row.apVendor);
+		            	 if(row.apVendor != null){
+		            		 if(typeof row.apVendor.communications != 'undefined' && row.apVendor.communications != null){
+			            		 return '<a href="#1">' + row.apVendor.communications[0].commValue + '</a>';
+		            		 }
+		            	 }
+	                 }},
+	             {
+	                 field:'legLogisticsNote',         
+	                 width: 800, 
+	                 title:'Notes'}
              ]]
     	 });
     }   
 
-    function loadDataListTrip(){
-
-    }
     
     
