@@ -20,6 +20,7 @@
 				</ul>
 			</li>
 			<li><a href="/atlas-web/universalImport" class="mws-i-24 i-cog">Universal Import</a></li>
+			<li><a href="/atlas-web/displayorder" class="mws-i-24 i-cog">Display Order</a></li>
 			<li><a href="/atlas-web/info/about" class="mws-i-24 i-text-styling">About</a></li>
 		</ul>
 	</div>

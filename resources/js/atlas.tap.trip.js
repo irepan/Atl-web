@@ -27,63 +27,13 @@
 	            }
 	
 	    });    
-    ///////////////////////////////////////////////////////////////////////////////
-    /**
-     * 
-     */
-    Date.prototype.format = function(format){
-    	  if(!format){
-    	      format = "yyyy-MM-dd hh:mm:ss";
-    	  }
-
-
-    	  var o = {
-    	          "M+": this.getMonth() + 1, // month
-    	          "d+": this.getDate(), // day
-    	          "h+": this.getHours(), // hour
-    	          "m+": this.getMinutes(), // minute
-    	          "s+": this.getSeconds(), // second
-    	         "q+": Math.floor((this.getMonth() + 3) / 3), // quarter
-    	         "S": this.getMilliseconds()
-    	          // millisecond
-    	 };
-    	 if (/(y+)/.test(format)) {
-    	      format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    	  }
-
-
-    	  for (var k in o) {
-    	      if (new RegExp("(" + k + ")").test(format)) { 
-    	          format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" +o[k]).length));
-    	     }
-    	  }
-    	  return format;
-    	};
-    	
-    	
-    	/**
-    	 * gettime timestamp to time format
-    	 * @returns {String}
-    	 */
-        function getTime() {
-            var ts = arguments[0] || 0;
-            var t, y, m, d, h, i, s;
-            t = ts ? new Date(ts * 1000) : new Date();
-            y = t.getFullYear();
-            m = t.getMonth() + 1;
-            d = t.getDate();
-            h = t.getHours();
-            i = t.getMinutes();
-            s = t.getSeconds();
-            return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
-        }
-    ///////////////////////////////////////////////////////////////////////////////
+    
     var cardview = $.extend({}, $.fn.datagrid.defaults.view, {
         renderRow: function(target, fields, frozen, rowIndex, rowData){
             var cc = [];
-            cc.push('<td>');
+            cc.push('<td style="height:auto;">');
             if (!frozen ){
-                cc.push('<table width="931px" >');
+                cc.push('<table width="931px" cellspacing="0" cellpadding="0" border="0" >');
                 cc.push('<tr>');
                 var check_tr = false;
                 var check_tr2 = false;
@@ -160,12 +110,12 @@
                         default:
                             if(i == 11 || i == 16 || i == 31 || i == 36 || i == 51 || i == 56){
                                 cc.push('<td>');
-                                cc.push('<div class="datagrid-cell" style="height:auto;">' + new Date(rowData[fields[i]]).format("yyyy-MM-dd") + '</div>');
+                                cc.push('<div class="datagrid-cell" style="height:auto;">' + $.format.date(rowData[fields[i]], 'yyyy-MM-dd') + '</div>');
                                 cc.push("</td>");                            
                             }else if(i == 12 || i == 17 || i == 32 || i == 37 || i == 52 || i == 57){
                                 cc.push('<td>');
-                                cc.push('<div class="datagrid-cell" style="height:auto;">' + new Date(rowData[fields[i]]).format("hh:mm") + '</div>');
-                                cc.push("</td>");                            
+                                cc.push('<div class="datagrid-cell" style="height:auto;">' + $.format.date(rowData[fields[i]], 'HH:mm') + '</div>');
+                                cc.push("</td>");    
                             }else{ 
                             	cc.push('<td field="'+ fields[i] + '">');
                             	cc.push('<div class="datagrid-cell" style="height:auto;">'+rowData[fields[i]]+'</div>');
@@ -300,6 +250,8 @@
             },
             onLoadSuccess: function()
             {
+		        $(this).datagrid('selectRow',0);	    		      
+
             	var currentRow = $("#tripGrid").datagrid('getRows')[0];
             	searchLegData(currentRow);
                 searchLegLogistics(currentRow);
@@ -412,7 +364,6 @@
 	                 width: 100, 
 	                 title:'Telephone', 
 	                 formatter:function(value,row,index){
-		            	 console.log(row.apVendor);
 		            	 if(row.apVendor != null){
 		            		 if(typeof row.apVendor.communications != 'undefined' && row.apVendor.communications != null){
 			            		 return '<a href="#1">' + row.apVendor.communications[0].commValue + '</a>';

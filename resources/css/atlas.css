@@ -8,22 +8,22 @@ font-size:12px;
   height: 15px;
 }
 .datagrid-header .datagrid-cell span{
-  font-size: 10px;
+  font-size: 12px;
   font-weight:bold;
   color:#0E2D5F;
 }
 .panel-title {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   color: #0E2D5F;
   height: 6px;
   line-height: 6px;
 }
 li {
-  font-size:10px;
+  font-size:12px;
 }
 .tabs-title {
-  font-size: 10px;
+  font-size: 12px;
 }
 .tabs-header {
   height: auto;
@@ -32,7 +32,7 @@ li {
   height: auto;
 }
 .textbox .textbox-text, h10, label, a {
-  font-size: 10px;
+  font-size: 12px;
   font-family:verdana,helvetica,arial,sans-serif;
 }
 /* .datagrid-body td { 
@@ -44,12 +44,22 @@ h10{
 }
 .combobox-item,
 .combobox-group {
-  font-size: 10px;
+  font-size: 12px;
 }
 .textbox .textbox-text:disabled {
      background: #F9F9F9;
 }
 
 .l-btn-text {
-  font-size: 10px;
+  font-size: 12px;
   }
+  
+.label-title {
+	font-size: 10px;
+	font-family: verdana,helvetica,arial,sans-serif;
+	height: 13px;
+	line-height: 13px;
+	text-align: left;
+	vertical-align: bottom;
+}
+

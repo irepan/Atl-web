@@ -1,7 +1,7 @@
 <div id="logisticstemplate" class="easyui-panel" title="Logistics Template" style="width:785px;height:436px;padding:5px">
 
 		<div id="logTempToolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add"    plain="true" onclick="javascript:addRowsBeforeL();">Add Logistics Item</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add-after"    plain="true" onclick="javascript:addRowsBeforeL();">Add Logistics Item After</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:deleteRowL();">Delete Logistics Item</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-add"    plain="true"  onclick="javascript:openNewLogTemplate();">New Logistics Template</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:deleteLogTempHeader();">Delete Logistics Template</a>
@@ -50,27 +50,25 @@
 		</tbody>
 	</table>
 	</div>
-	<div id="newLogTemplate" class="easyui-window" title="New Logistics Template" style="width:300px;height:210px;padding:10px;"        
-		data-options="modal:true,iconCls:'icon-save',closed:true,
+	<div id="newLogTemplate" class="easyui-window" title="New Logistics Template" style="width:300px;height:150px;padding:5px;"        
+		data-options="modal:true,closed:true,closable:false,
                 collapsible:false,minimizable:false,maximizable:false">
-      <div style="margin:10px 0;"></div>
-		<div style="padding:15px 10px 20px 5px">
-	        <form id="fnew_logTemp" >
-	            <table >
-	                <tr>
-	                    <td>Name:</td>
-	                    <td><input id="newLogTempName" class="easyui-textbox" type="text" name="name" ></input></td>
-	                </tr>	                   	                
-	                <tr>
-	                    <td>Description:</td>
-                    	<td><input id="newLogTempDesc" class="easyui-textbox" type="text" name="desc" ></input></td>
-	                </tr>
-	            </table>
-	        </form>
-		    <div style="text-align:center;padding:15px">
-		        <a href="#" class="easyui-linkbutton" onclick="javascript:saveLogTempHeader();">Save</a>
-		        <a href="#" class="easyui-linkbutton"  onclick="javascript:cancelForm();">Cancel</a>
-		    </div>	        
+      
+		<div id="newlogTempToolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save"   plain="true" onclick="javascript:saveLogTempHeader();">Save</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo"   plain="true" onclick="javascript:cancelForm();">Cancel</a>
+						
+		</div>
+		<div style="padding:10px 10px 5px 5px">
+	        <div style="font-weight:bold;">
+				<h10 style="float:left;padding-left:7px">Name</h10>
+				<input id="newLogTempName" class="easyui-textbox"  style="width:254px;height:20px" data-options="disabled:false" value=""/>
+				<h10 style="float:left;padding-left:7px">Description</h10>
+				<input id="newLogTempDesc" class="easyui-textbox"  style="width:254px;height:20px" data-options="disabled:false" value=""/>
+			</div>
+			
+				
+			
 	    </div>
     </div>		
     <div id="wPreDelete" class="easyui-window" title="Delete Logistics Template" style="width:500px;height:150px;padding:10px;"        
@@ -88,7 +86,7 @@
 	    </div>
     </div>		
     <div id="wWarning" class="easyui-window" title="Warning Logistics Template" style="width:500px;height:150px;padding:10px;"        
-		data-options="modal:true,closed:true,
+		data-options="modal:true,closed:true,closable:false,
                 collapsible:false,minimizable:false,maximizable:false">
       <div style="margin:10px 0;"></div>
 		<div style="text-align:center;padding:5px 5px 5px 5px">
@@ -112,17 +110,16 @@ var historyDesc='';
 var firstcombo;
 var count=0;
 var addrow=0,editrow=0;
-var lastIndex=-1;
+var lastIndex=0;
 
 	$(function(){
-		
-		 $('#logTempGrid').edatagrid();	  
-		 if(historyName=='' && historyDesc=='')
+		$('#logTempGrid').edatagrid();	  
+		if(historyName=='' && historyDesc=='')
 			loadDataCombobox();
 		$('#logTempName').textbox({
-			onChange:function(newValue,oldValue){
-				historyName=oldValue;
-				
+		onChange:function(newValue,oldValue){
+			historyName=oldValue;
+			
 			}
 		});
 		$('#logTempDesc').textbox({
@@ -132,26 +129,25 @@ var lastIndex=-1;
 		});
 		$('#logTempGrid').datagrid({
 			onClickRow:function(rowIndex,row){
+				//var editors = $('#logTempGrid').datagrid('getEditors', rowIndex);
 				var index=0;
 				index=rowIndex;
-				if(row.logisticDetailPOD){
-					$('#logTempGrid').datagrid('getRows')[index]['logisticDetailPOD']='POD';						
+				if($('#logTempGrid').datagrid('getRows')[index]['logisticDetailPOD']==true){
+					$('#logTempGrid').datagrid('getRows')[index]['logisticDetailPOD']='POD';
 				}
-				else if(!row.logisticDetailPOD){	
+				else if($('#logTempGrid').datagrid('getRows')[index]['logisticDetailPOD']==false){	
 					$('#logTempGrid').datagrid('getRows')[index]['logisticDetailPOD']='POA';
 				}
-					
+				//$('#logTempGrid').datagrid('beginEdit', rowIndex);
 				if (lastIndex != rowIndex){
 					$(this).datagrid('endEdit', lastIndex);
 					$(this).datagrid('beginEdit', rowIndex);
 				}
-				lastIndex = rowIndex;			
+				lastIndex = rowIndex;		
 			},
-			onBeginEdit:function(rowIndex,row){			
-				var editors = $('#logTempGrid').datagrid('getEditors', rowIndex);
-				editrow++;
-				
-			}
+			onBeginEdit:function(rowIndex,row){					
+				editrow++;				
+			}		
 			
 		});
 				
@@ -174,6 +170,7 @@ var lastIndex=-1;
 	    		            desc:$(this).combobox('getData')[0].desc
 	    		        }
 	                selectHeader(logTempHeader);
+	                
 		    	}
 		    }
 		});	
@@ -193,35 +190,50 @@ var lastIndex=-1;
 	function selectHeader(headerlist){	
 		$('#logTempName').textbox('setValue',headerlist.id.toString());
 		$('#logTempDesc').textbox('setValue',headerlist.desc.toString());
-		historyName=$('#logTempName').textbox('getValue');
-		historyDesc=$('#logTempDesc').textbox('getValue');
+		historyName='';
+		historyDesc='';
 		loadDataLogisticDetail(headerlist.id);
 		addrow=0;
 		editrow=0;
 	}
 	function addRowsBeforeL(){		
 		addrow=addrow+1;
-		count=$('#logTempGrid').datagrid('getRows').length;		
-		var item = count+1;
-		if (count>0){
-		    var index = count;
-		} else {
-		    index = 0;
-		}
-	//	$('#logTempGrid').datagrid('endEdit', lastIndex);
-		
-		$('#logTempGrid').datagrid('insertRow', {
-		    row: {
-				logisticDetailOrder: item,
-				logisticDetailPOD: '',
-				logisticType: '',
-				logisticDetailNote:''
+		var rowselect = $('#logTempGrid').datagrid('getSelected');
+		var preindex=-1;
+		var item=1;
+		if($('#logTempName').val()!='')
+			{
+				if(rowselect!=null)
+					{
+						preindex  = $('#logTempGrid').datagrid('getRowIndex',rowselect);
+						if(preindex!=-1)
+							item = rowselect.logisticDetailOrder+1;
+						else
+							item=1;
+					}
+				
+				if (preindex>-1){
+				    var index = preindex+1;
+				    $('#logTempGrid').datagrid('endEdit', preindex);
+				} else {
+				    index = 0;
+				}
+			//	$('#logTempGrid').datagrid('endEdit', lastIndex);
+				
+				$('#logTempGrid').datagrid('insertRow', {
+					index: index,
+				    row: {
+						logisticDetailOrder: item,
+						logisticDetailPOD: '',
+						logisticType: '',
+						logisticDetailNote:''
+					}
+				});
+				
+				$('#logTempGrid').datagrid('selectRow', index);		
+		        $('#logTempGrid').datagrid('beginEdit', index);
+		        lastIndex=index;
 			}
-		});
-
-		$('#logTempGrid').datagrid('selectRow', index);
-        $('#logTempGrid').datagrid('beginEdit', index);
-        lastIndex=index;
 	}
 	function deleteRowL(){
 		var rowselect = $('#logTempGrid').datagrid('getSelected');
@@ -248,8 +260,6 @@ var lastIndex=-1;
 		       url:'/atlas-web/atlas-ws/template/logistics/logtemplate/' + header+'/details',
 		        // type data on load
 		        dataType: "json",
-		        cache: false,
-		        timeout: 5000,
 		        success: function(data) {	
 		        	count=data.length;
 	        		 $('#logTempGrid').datagrid({
@@ -307,6 +317,20 @@ var lastIndex=-1;
 												editor:{type:'textbox'}},	
 								]]
 	            	}).datagrid("loadData",data);
+	        		 if(count!=0){	        			        		 	
+	        		 	for(var j=0;j<count;j++){
+	        		 		if(data[j].logisticDetailPOD){
+		    					$('#logTempGrid').datagrid('getRows')[j]['logisticDetailPOD']='POD';
+		    				}
+		    				else if(!data[j].logisticDetailPOD){	
+		    					$('#logTempGrid').datagrid('getRows')[j]['logisticDetailPOD']='POA';
+		    				}
+	        		 	}
+	        		 	$('#logTempGrid').datagrid('selectRow',0);
+	        		 	$('#logTempGrid').datagrid('beginEdit', 0);	
+	        		 	lastIndex=0;
+	        		 	
+	        		 }
 		        }
 		    });
 		});				
@@ -343,22 +367,24 @@ var lastIndex=-1;
 							    selectHeader(logTempHeader);
 							    $('#newLogTemplate').window('close');
 		            		}
-		            	else
+		            	else{
 		            		$('#wWarning').window('open');
 		            		cancelLT();
-		            		//$('#logTempList').combobox('setValue',historyName);
-		            		//alert("Error: This Logistic Template Name already exists.");
-					        
+		            	}
+		            	
 		            },
 		            failure: function(errMsg) {
-		                alert(errMsg);
+		               // alert(errMsg);
 		            }
 		        });	    
 			}
 	}
 	function deleteLogTempHeader(){
-		$('#newLogTempName').textbox('clear','');
-		$('#wPreDelete').window('open');   
+		if($('#logTempName').val()!='')
+			{
+				$('#newLogTempName').textbox('clear','');
+				$('#wPreDelete').window('open');   
+			}
 	}
 	function updateLogTempHeader(){				
 		        var logTempHeader = {
@@ -376,7 +402,7 @@ var lastIndex=-1;
 		            success: function (data) {
 		            	if(data.id!=null)
 	            		{
-			            	alert('ok');
+			            	//alert('ok');
 			            	loadDataComboboxAdd();
 			            	$('#logTempList').combobox('setValue',$('#logTempName').val());
 			            	selectHeader(logTempHeader);
@@ -384,10 +410,6 @@ var lastIndex=-1;
 		            	else{
 		            		$('#wWarning').window('open');
 		            		cancelLT();
-		            		//alert("Error: This Logistic Template Name already exists.");
-		            		//loadDataComboboxAdd();
-		            		//$('#logTempList').combobox('setValue',historyName.toString());
-		            		//selectHeader(logTempHeader);
 		            	}
 		            },
 			            failure: function(errMsg) {
@@ -409,7 +431,7 @@ var lastIndex=-1;
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function (data) {            	
-	            	alert('ok');
+	            	//alert('ok');
 	            	loadDataComboboxAdd();
 	            	$('#logTempList').combobox('setValue',$('#logTempName').val());
 	            	selectHeader(logTempHeader);	            
@@ -419,17 +441,48 @@ var lastIndex=-1;
 	            }		            
         });		        		      
 	}
-	function saveLT(){		
-		if(historyName!='' ||  historyDesc!='')
-			{
-			if(historyName!=$('#logTempName').val()){				
-				updateLogTempHeader();
-			}
-			else 
-				updateLogTempHeaderDesc();				
-			}			
-		if(editrow>0 || addrow>0)
-			saveLogTempDetail();
+	function deleteLogDetails(){	
+		$('#logTempGrid').datagrid('acceptChanges');
+        var logTempHeader = {
+        		id: $('#logTempName').val(),
+	            name: historyName.toString(),
+	            desc: $('#logTempDesc').val(),
+        }		       
+        $.ajax({
+            url: '/atlas-web/atlas-ws/template/logistics/logtemplatedetail/deleteall',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(logTempHeader),  
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            success: function (data) { 
+            	if(data!=null){
+            		saveLogTempDetailList();
+            		}
+            	}
+        });		        		      
+	}
+
+	function saveLT(){	
+		 var logTempHeader = {
+	        		id: $('#logTempName').val(),
+		            desc: $('#logTempDesc').val(),
+	        }		       
+		if(historyName!='' || historyDesc!='')
+			{		
+			saveLogTempDetailList();
+			//deleteLogDetails();
+			historyName='';
+			historyDesc='';
+			addrow=0;
+			editrow=0;
+		}
+		else if(editrow!=0 || addrow!=0){
+				//deleteLogDetails();
+				saveLogTempDetailList();
+				addrow=0;
+				editrow=0;
+		}
 	
 	}
 	function cancelLT(){
@@ -470,11 +523,6 @@ var lastIndex=-1;
 	                alert(errMsg);
 	            }
 	        });	
-			/*$('#logTempName').textbox('setValue','');
-	        loadDataCombobox();
-			historyName='';
-			historyDesc='';
-			$('#wPreDelete').window('close');*/
 	}
 	function noDel(){
 		$('#wPreDelete').window('close');
@@ -486,27 +534,25 @@ var lastIndex=-1;
 			var total = data.total; 
 			var rows = data.rows; 
 			var podpoa;
-			//var logTempDetailList=[];
 			var logTempHeader = {
 		        		id: $('#logTempName').val(),
 			            desc: $('#logTempDesc').val(),
 			        }		       
 			for(var i=0;i<total;i++){
+				var order=i+1;
 				var detpod=$('#logTempGrid').datagrid('getRows')[i]['logisticDetailPOD'];
 				if(detpod=="POD" || detpod=="true")
 					podpoa=true;
 				else
 					podpoa=false;				
 			        var logTempDetail = {
-			        	logisticDetailOrder:$('#logTempGrid').datagrid('getRows')[i]['logisticDetailOrder'],
+			        	logisticDetailOrder:order,
+			        	//$('#logTempGrid').datagrid('getRows')[i]['logisticDetailOrder'],
 			        	logisticDetailPOD:podpoa,
 			        	logisticType:$('#logTempGrid').datagrid('getRows')[i]['logisticType'],
 			        	logisticDetailNote:$('#logTempGrid').datagrid('getRows')[i]['logisticDetailNote'],
 			        	logisticHeader:logTempHeader.id
 			        }
-			        
-			 //       logTempDetailList.push(logTempDetail);
-			//}
 			        $.ajax({
 			            url: '/atlas-web/atlas-ws/template/logistics/logtemplatedetail/update',
 			            type: 'POST',
@@ -515,16 +561,66 @@ var lastIndex=-1;
 	                    contentType: 'application/json',
 	                    mimeType: 'application/json',
 			            success: function (data) {
-			            //	alert('ok SaveGrid');
-			            },
-			            failure: function(errMsg) {
-			                alert(errMsg);
-			            }
+			            	if(data!=null){
+			            		if(order==total){
+			            			loadDataComboboxAdd();
+			                    	$('#logTempList').combobox('setValue',logTempHeader.id);
+			                    	selectHeader(logTempHeader);	 
+			            		}
+			            			
+			            	}
+			             }
 			        });	
 				}
 	            	
 	}
-	
+	function saveLogTempDetailList(){	
+		$('#logTempGrid').datagrid('acceptChanges');		
+			data = $("#logTempGrid").datagrid("getData");
+			var total = data.total; 
+			var rows = data.rows; 
+			var podpoa;
+			var listDetails=[];
+			 var logTempHeader = {
+		        		id: $('#logTempName').val(),
+			            name: historyName.toString(),
+			            desc: $('#logTempDesc').val(),
+		        }    
+			for(var i=0;i<total;i++){
+				var order=i+1;
+				var detpod=$('#logTempGrid').datagrid('getRows')[i]['logisticDetailPOD'];
+				if(detpod=="POD" || detpod=="true")
+					podpoa=true;
+				else
+					podpoa=false;				
+			        var logTempDetail = {
+			        	logisticDetailOrder:order,
+			        	//$('#logTempGrid').datagrid('getRows')[i]['logisticDetailOrder'],
+			        	logisticDetailPOD:podpoa,
+			        	logisticType:$('#logTempGrid').datagrid('getRows')[i]['logisticType'],
+			        	logisticDetailNote:$('#logTempGrid').datagrid('getRows')[i]['logisticDetailNote'],
+			        	logisticHeader:logTempHeader.id,
+			        	logisticHeaderDesc:logTempHeader.desc,
+			        	logisticHeaderHist:logTempHeader.name
+			        }
+			        listDetails.push(logTempDetail);
+			}
+	        $.ajax({
+	            url: '/atlas-web/atlas-ws/template/logistics/logtemplatedetaillist/update',
+	            type: 'POST',
+	            dataType: 'json',
+                   data: JSON.stringify(listDetails),  
+                   contentType: 'application/json',
+                   mimeType: 'application/json',
+	            success: function (data) {
+	            	if(data=="ok"){	            		
+            			loadDataComboboxAdd();
+                    	$('#logTempList').combobox('setValue',logTempHeader.id);
+                    	selectHeader(logTempHeader);	
+	            	}
+	             }
+	        });	 	
+	}
 	function delLogTempDetail(){	
 		
 		var row = $('#logTempGrid').datagrid('getSelected');		

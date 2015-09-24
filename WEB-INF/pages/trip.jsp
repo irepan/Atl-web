@@ -3,13 +3,13 @@
 	<div id="tabs" class="easyui-tabs" style="width: 970px; height: 593px">
 		<div id="tabTrip" title="Trip id" style="padding: 10px">
 		
-			<table id="tripGrid"> 
+			<table id="tripGrid" class="easyui-datagrid" cellspacing="0" cellpadding="0" border="0"> 
  			</table>
 			
 			<div id="tripToolbar" style="padding: 3px">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add-before"
 					plain="true" onclick="javascript:addRowsBefore();">New Leg Before</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add-after"
 					plain="true" onclick="javascript:addRowsAfter();">New Leg After</a>
 				<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
 					plain="true" onclick="javascript:deleteRow();">Delete Leg</a> 
@@ -24,16 +24,17 @@
 				<div data-options="region:'east',split:true" title="Crew"
 					style="width: 140px;">
 					<div id="lstCrew" class="easyui-datalist" 
-						data-options=" textField: 'fullName' ,
-							lines: false " 
-						style="width: 100%; height: 218px; list-style-type: none; padding: 10px; margin: 0px">
+						data-options=" 
+							textField: 'fullName' ,
+							lines: true,
+							singleSelect: true " 
+						style="width: 100%; height: 235px; list-style-type: none; padding: 10px; margin: 0px">
 					</div>
 				</div>
 				<div data-options="region:'west',split:true" title="Passengers"
 					style="width: 150px">
 					<div id="lstPassengers" class="easyui-datalist" 
-						data-options=" textField: 'fullName' ,
-							lines: false " 
+						data-options="" 
 						style="width: 150px; height: 218px; list-style-type: none; padding: 10px; margin: 0px">
 					</div>
 				</div>
@@ -77,11 +78,11 @@
 			<table id="manifestList"></table>
 			
 			<div id="manifestToolbar" style="padding: 3px">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add-person"
 					plain="true" onclick="javascript:addRowsBefore();">Add Pax</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add-person" plain="true"
 					onclick="javascript:addRowsAfter();">Add One-Time Pax</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-remove-person"
 					plain="true" onclick="javascript:deleteRow();">Delete Pax</a> 
 				<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"
 					onclick="showMsg('Warning','Save')">Save</a> 
@@ -92,12 +93,12 @@
 			<div style="margin: 0px 0 5px 0;"></div>
 			<div class="easyui-layout" style="width: 950px">
 				<div>
-					<label style="float: left; padding-left: 5px" class="label-title">Order</label>
-					<label style="float: left; padding-left: 10px" class="label-title">Leg</label>
-					<label style="float: left; padding-left: 30px" class="label-title">ID</label>
-					<label style="float: left; padding-left: 253px" class="label-title">Name</label>
-					<label style="float: left; padding-left: 232px" class="label-title">Assign Leg(s)</label> 
-					<label style="float: left; padding-left: 185px" class="label-title">Code</label>
+					<label style="float: left; padding-left: 5px" class="panel-title label-title">Order</label>
+					<label style="float: left; padding-left: 10px" class="panel-title label-title">Leg</label>
+					<label style="float: left; padding-left: 30px" class="panel-title label-title">ID</label>
+					<label style="float: left; padding-left: 253px" class="panel-title label-title">Name</label>
+					<label style="float: left; padding-left: 232px" class="panel-title label-title">Assign Leg(s)</label> 
+					<label style="float: left; padding-left: 185px" class="panel-title label-title">Code</label>
 				</div>
 				<div style="clear: both; margin-top: 5px">
 				
@@ -108,16 +109,15 @@
 						class="easyui-combobox" name="leg" data-options="editable:false" 
 						style="width: 48px; height: 20px">
 					
-					<input id="paxID" style="width: 260px; height: 20px"
-						data-options="
-										prompt:' ',
-										icons:[{iconCls:'icon-search',
-										handler: function(e){var v = $(e.data.target).textbox('getValue');
-										showMsg('Warning','Search for Pax ID: ' + (v ? v : 'empty'));
-										}}]" />
+					<input id="paxID"  class="easyui-combobox" style="width: 260px; height: 20px" data-options="
+					                loader: searchNameTextShort,
+					                mode: 'remote',
+					                valueField: 'id',
+					                textField: 'name'
+					            ">		
 										
 					<input id="paxName" class="easyui-combobox" style="width: 260px; height: 20px" data-options="
-					                loader: myloader,
+					                loader: searchNameText,
 					                mode: 'remote',
 					                valueField: 'id',
 					                textField: 'name'
@@ -129,47 +129,45 @@
 				</div>
 				
 				<div>
-					<label style="float: left; padding-left: 5px" class="label-title">Host Auth Code</label> 
-					<label style="float: left; padding-left: 145px" class="label-title">Sponsor</label> 
-					<label style="float: left; padding-left: 187px" class="label-title">Account</label>
-					<label style="float: left; padding-left: 187px" class="label-title">Expense Location</label>
+					<label style="float: left; padding-left: 5px" class="panel-title label-title">Host Auth Code</label> 
+					<label style="float: left; padding-left: 145px" class="panel-title label-title">Sponsor</label> 
+					<label style="float: left; padding-left: 187px" class="panel-title label-title">Account</label>
+					<label style="float: left; padding-left: 187px" class="panel-title label-title">Expense Location</label>
 				</div>
 				
 				<div style="clear: both; margin-top: 5px">
-					<select id="hostAuthCode" class="easyui-combobox" name="host"
-						data-options="editable:false" style="width: 230px;; height: 20px">
-					</select> 
+					<input id="hostAuthCode" class="easyui-combobox"
+						data-options="editable:false" style="width: 230px; height: 20px">
+						
 					<input id="sponsor" class="easyui-combobox" style="width: 230px; height: 20px" data-options="
-					                loader: myloader,
+					                loader: searchNameText,
 					                mode: 'remote',
 					                valueField: 'id',
 					                textField: 'name'
 					            ">										
-					<select id="account" class="easyui-combobox" name="account"
-						data-options="editable:false" style="width: 230px;; height: 20px">
-					</select> 
+					<input id="account" class="easyui-combobox" 
+						data-options="editable:false" style="width: 230px; height: 20px">
 					
-					<select id="expenseLocation" class="easyui-combobox"
-						name="expenseLocation" data-options="editable:false"
-						style="width: 230px;; height: 20px">
-					</select>
+					<input id="expenseLocation" class="easyui-combobox"
+						  data-options="editable:false"
+						style="width: 230px; height: 20px">
 				</div>
 				<div>
-					<label style="float: left; padding-left: 5px" class="label-title">Visa</label>
-					<label style="float: left; padding-left: 213px" class="label-title">Stay</label>
-					<label style="float: left; padding-left: 210px" class="label-title">Passport</label>
-					<label style="float: left; padding-left: 185px" class="label-title">Passport Expiration</label> 
-					<label style="float: left; padding-left: 82px" class="label-title">Dsm</label>
+					<label style="float: left; padding-left: 5px" class="panel-title label-title">Visa</label>
+					<label style="float: left; padding-left: 213px" class="panel-title label-title">Stay</label>
+					<label style="float: left; padding-left: 210px" class="panel-title label-title">Passport</label>
+					<label style="float: left; padding-left: 185px" class="panel-title label-title">Passport Expiration</label> 
+					<label style="float: left; padding-left: 82px" class="panel-title label-title">Dsm</label>
 				</div>
 				<div style="clear: both; margin-top: 5px">
 					<select id="visa" class="easyui-combobox" name="visa"
-						data-options="editable:false" style="width: 224px;; height: 20px">
+						data-options="editable:false" style="width: 224px; height: 20px">
 					</select> 
 					<input id="stay" class="easyui-textbox"
 						style="width: 224px; height: 20px" value="" /> 
 					<select
 						id="passport" class="easyui-combobox" name="passport"
-						data-options="editable:false" style="width: 224px;; height: 20px">
+						data-options="editable:false" style="width: 224px; height: 20px">
 					</select> 
 					
 					<input id="passportExpiration" class="easyui-textbox"
@@ -180,25 +178,25 @@
 					
 				</div>
 				<div>
-					<label style="float: left; padding-left: 5px" class="label-title">Reason For Travel</label>
+					<label style="float: left; padding-left: 5px" class="panel-title label-title">Reason For Travel</label>
 				</div>
 				
 				<div style="clear: both; margin-top: 5px">
 					<input id="reasonForTravel" class="easyui-textbox" style="width: 930px; height: 20px" value="" />
 				</div>
 				<div>
-					<label style="float: left; padding-left: 0px" class="label-title">Passenger Manifest Comments</label> 
-					<label style="float: left; padding-left: 302px" class="label-title">Passenger Profile Comments</label>
+					<label style="float: left; padding-left: 0px" class="panel-title label-title">Passenger Manifest Comments</label> 
+					<label style="float: left; padding-left: 302px" class="panel-title label-title">Passenger Profile Comments</label>
 				</div>
 				<div style="clear: both; margin-top: 5px">
-					<input class="easyui-textbox" data-options="multiline:true"
+					<input id="pxTripComments" class="easyui-textbox" data-options="multiline:true"
 						style="width: 463px; height: 84px"
-						value="This Text Box will allow the user to enter a comment for the selected Passenger for the Trip.">
-					<input class="easyui-textbox"
+						value="">
+					<input id="pxProfileComments" class="easyui-textbox"
 						data-options="multiline:true,disabled:true"
 						style="width: 463px; height: 84px"
-						value="This Text Box will display the Passenger Profile comments from the Passenger Profile web form.">
-				</div>
+						value="">
+				</div>	
 			</div>
 		</div>
 			
@@ -528,11 +526,11 @@
 									</table>
 								</div>
 								<div data-options="region:'center',split:false,collapsible:false" border="false" >
-									<label>Address</label>
+									<label class="panel-title label-title">Address</label>
 									<input class="easyui-textbox" id="vendorAddress" data-options="multiline:true,disabled:true" style="width:375px;height:58px" value="8001 S INTERPORT BLVD ....................................................... PO BOX 12345..................................................................... ENGLEWOOD COLORADO 80112 ............................................. US UNITED STATES">
-									<label>Airport Vendor Comments</label>
+									<label class="panel-title label-title">Airport Vendor Comments</label>
 									<input class="easyui-textbox" id="airportVendorComments" data-options="multiline:true,disabled:true" style="width:375px;height:112px" value="This Text Box will display the Airport Vendor comments from table COMPANY_AP_VNDR field CAV_COMMENTS">
-									<label>General Vendor Comments</label>
+									<label class="panel-title label-title">General Vendor Comments</label>
 									<input class="easyui-textbox" id="generalVendorComments" data-options="multiline:true,disabled:true" style="width:375px;height:112px" value="This Text Box will display the General Vendor comments from table COMPANY_VENDOR field CV_COMMENTS">
 								</div>
 							</div>
@@ -630,13 +628,13 @@
 									</table>
 								</div>
 								<div data-options="region:'center',split:false,collapsible:false" border="false" >
-									<label>Address</label>
+									<label class="panel-title label-title">Address</label>
 									<input class="easyui-textbox" id="PODAddress" data-options="multiline:true,disabled:true" style="width:375px;height:58px" value="DENVER COLORADO ............................................................... US UNITED STATES">
-									<label>Company Airport Comments</label>
+									<label class="panel-title label-title">Company Airport Comments</label>
 									<input class="easyui-textbox" id="PODcompanyAirportComments" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the Company POD Airport comments from table COMPANY_AIRPORT field CMPY_AP_COMMENTS">
-									<label>Country Overflight and Entry Requirements</label>
+									<label class="panel-title label-title">Country Overflight and Entry Requirements</label>
 									<input class="easyui-textbox" id="PODcountryOverflightReq" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the POD Overflight and Entry Requirements from table COUNTRY field CTRY_UV_OVER_REQ">
-									<label>Country VISA/Passport and General Info</label>
+									<label class="panel-title label-title">Country VISA/Passport and General Info</label>
 									<input class="easyui-textbox" id="PODcountryVISAPassports" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the POD VISA/Passport and General Info from table COUNTRY field CTRY_UV_VP_GEN_INFO">
 								</div>
 							</div>
@@ -734,13 +732,13 @@
 									</table>
 								</div>
 								<div data-options="region:'center',split:false,collapsible:false" border="false" >
-									<label>Address</label>
+									<label class="panel-title label-title">Address</label>
 									<input class="easyui-textbox" id="POAAddress" data-options="multiline:true,disabled:true" style="width:375px;height:58px" value="BOSTON MASSACHUSETTS ..................................................... US UNITED STATES">
-									<label>Company Airport Comments</label>
+									<label class="panel-title label-title">Company Airport Comments</label>
 									<input class="easyui-textbox" id="POAcompanyAirportComments" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the Company POA Airport comments from table COMPANY_AIRPORT field CMPY_AP_COMMENTS">
-									<label>Country Overflight and Entry Requirements</label>
+									<label class="panel-title label-title">Country Overflight and Entry Requirements</label>
 									<input class="easyui-textbox" id="POAcountryOverflightReq" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the POA Overflight and Entry Requirements from table COUNTRY field CTRY_UV_OVER_REQ">
-									<label>Country VISA/Passport and General Info</label>
+									<label class="panel-title label-title">Country VISA/Passport and General Info</label>
 									<input class="easyui-textbox" id="POAcountryVISAPassports" data-options="multiline:true,disabled:true" style="width:375px;height:66px" value="This Text Box will display the POA VISA/Passport and General Info from table COUNTRY field CTRY_UV_VP_GEN_INFO">
 								</div>
 							</div>

@@ -11,7 +11,7 @@
 		<title><tiles:getAsString name="title" /></title>
 		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/main.css"/>'/>
 		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/themes/default/easyui.css"/>'/>
-		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/themes/icon.css"/>'/>
+		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/Atlas/icon.css"/>'/>
 		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/themes/color.css"/>'/>
 		<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/atlas.css"/>'/>
 		<script type="text/javascript" src='<c:url value="/resources/js/jquery-1.11.3.min.js"/>'></script>
@@ -27,6 +27,7 @@
 
 		<link rel="stylesheet" type="text/css" media="screen" href='<c:url value="/resources/css/mws.style.css"/>'/>
 		<link rel="stylesheet" type="text/css" media="screen" href='<c:url value="/resources/css/icons/icons.css"/>'/>
+		<link rel="stylesheet" type="text/css" media="screen" href='<c:url value="/resources/css/themes/atlas-icons.css"/>'/>
 		<link rel="stylesheet" type="text/css" media="screen" href='<c:url value="/resources/css/demo.css"/>'/>
 
 		<link rel="stylesheet" type="text/css" media="screen" href='<c:url value="/resources/css/mws.theme.css"/>'/>
@@ -36,6 +37,8 @@
 		<![endif]-->
 		
 		<script type="text/javascript" src='<c:url value="/resources/plugins/tipsy/jquery.tipsy.js"/>'></script>
+		<script type="text/javascript" src='<c:url value="/resources/plugins/dateformat/jquery-dateFormat.js"/>'></script>
+		
 		<script type="text/javascript" src='<c:url value="/resources/js/mws.js"/>'/></script>
 		
 		
