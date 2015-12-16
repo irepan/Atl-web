@@ -51,7 +51,7 @@
 //-->
 	$('#crewGroup').combobox({
 		method:'get',
-		url:'/atlas-web/atlas-ws/crewgroup/list',
+		url:'/atlas-ws/crewgroup/list',
 		valueField:'id',
 		textField:'description',
 		onLoadSuccess: function(){
