@@ -1266,9 +1266,11 @@
   width: 10000px;
   float: left;
 }
+
 .datagrid-row-editing .datagrid-cell {
-  height: auto;
+  height: 30px;
 }
+
 .datagrid-header-check,
 .datagrid-cell-check {
   padding: 0;

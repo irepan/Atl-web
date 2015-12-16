@@ -68,3 +68,14 @@ h10{
 	vertical-align: bottom;
 }
 
+.datagrid-row-editing .datagrid-cell {
+  height: 30px !important;  /*Quitar*/
+}
+/*Quitar*/
+.datagrid-row-editing input, .datagrid-cell input {
+  height: 29px !important;
+}
+/*Quitar*/
+.datagrid-row-editing span, .datagrid-cell select {
+  height: 29px !important;
+}
