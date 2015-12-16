@@ -106,3 +106,41 @@
             
         </div>
     </div>
+	<script>
+		$(document).ready(function(){
+			$("#mws-sidebar").animate({left: '-200px'});
+			$("#mws-sidebar-bg").animate({left: '-200px'});
+			$(".container").animate({left: '-200px'});
+			width = $(".container").width();
+			width = width+200;
+			width = ''+width+'px';
+			$(".container").animate({width: width});
+		});
+		toggle = 1;
+		$("#mws-logo-wrap").click(function(){
+			if(toggle == 1)
+			{
+				$("#mws-sidebar").animate({left: '0px'});
+				$("#mws-sidebar-bg").animate({left: '0px'});
+				$(".container").animate({left: '0px'});
+				width = $(".container").width();
+				width = width-200;
+				width = ''+width+'px';
+				$(".container").animate({width: width});
+				toggle = 0;
+			}
+			else
+			{
+				$("#mws-sidebar").animate({left: '-200px'});
+				$("#mws-sidebar-bg").animate({left: '-200px'});
+				$(".container").animate({left: '-200px'});
+				width = $(".container").width();
+				width = width+200;
+				width = ''+width+'px';
+				$(".container").animate({width: width});
+				toggle = 1;
+			}
+			
+			
+		});  
+	</script>

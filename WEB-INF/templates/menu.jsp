@@ -1,7 +1,6 @@
 <!-- Necessary markup, do not remove -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="mws-sidebar-stitch"></div>
-<div id="mws-sidebar-bg"></div>
+<div id="mws-sidebar-bg"></div>  
 <!-- Sidebar Wrapper -->
 <div id="mws-sidebar">
 	<!-- Search Box -->
